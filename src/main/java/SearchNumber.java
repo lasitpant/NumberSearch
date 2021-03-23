@@ -64,7 +64,7 @@ public class SearchNumber implements NumberFinder{
 
             br.close();
             return data;
-        } catch(Exception e) {
+        } catch(NullPointerException | JsonSyntaxException | IOException e) {
             //logging Exception and returning the list as blank
             logger.error(e.toString());
             return data;
@@ -74,9 +74,11 @@ public class SearchNumber implements NumberFinder{
 
 
     public static void main(String args[]){
-        SearchNumber ss = new SearchNumber();
-        List<CustomNumberEntity> list = ss.readFromFile(System.getProperty("user.dir") + "\\data.json");
-        System.out.println(ss.contains(620000, list));
-
+        SearchNumber check = new SearchNumber();
+        List<CustomNumberEntity> list = check.readFromFile(System.getProperty("user.dir") + "\\data.json");
+        //false
+        System.out.println(check.contains(90,list));
+        //true
+        System.out.println(check.contains(30,list));
     }
 }
